@@ -10,6 +10,9 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import com.qa.ftsewebsite.pages.FTSEPage;
 
 public class FTSESeleniumTest {
 	
@@ -26,20 +29,24 @@ public class FTSESeleniumTest {
 	@Test
 	public void test_ShoppingWebsite() throws InterruptedException {
 		driver.get("https://www.hl.co.uk/shares/stock-market-summary/ftse-100");
-		WebElement targ = driver.findElement(By.id("acceptCookie"));
-		targ.click();
-		targ = driver.findElement(By.xpath("//a[@title='View risers']"));
-		targ.click();
-		targ = driver.findElement(By.xpath("//tbody/tr[1]"));
-		System.out.println(" --- LARGEST  RISER ---");
-		System.out.println(targ.getText());
-		System.out.println(" ----------------------");
-		targ = driver.findElement(By.xpath("//a[@title='View fallers']"));
-		targ.click();
-		targ = driver.findElement(By.xpath("//tbody/tr[1]"));
-		System.out.println(" --- LARGEST FALLER ---");
-		System.out.println(targ.getText());
-		System.out.println(" ----------------------");
+		FTSEPage page = PageFactory.initElements(driver, FTSEPage.class);
+		page.acceptCookies();
+		page.printRiser();
+		page.printFaller();
+//		WebElement targ = driver.findElement(By.id("acceptCookie"));
+//		targ.click();
+//		targ = driver.findElement(By.xpath("//a[@title='View risers']"));
+//		targ.click();
+//		targ = driver.findElement(By.xpath("//tbody/tr[1]"));
+//		System.out.println(" --- LARGEST  RISER ---");
+//		System.out.println(targ.getText());
+//		System.out.println(" ----------------------");
+//		targ = driver.findElement(By.xpath("//a[@title='View fallers']"));
+//		targ.click();
+//		targ = driver.findElement(By.xpath("//tbody/tr[1]"));
+//		System.out.println(" --- LARGEST FALLER ---");
+//		System.out.println(targ.getText());
+//		System.out.println(" ----------------------");
 		
 		Thread.sleep(5000);
 	}

@@ -10,6 +10,9 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import com.qa.shoppingwebsite.webpages.demosite.pages.ShoppingHomePage;
 
 public class ShoppingSeleniumTest {
 	
@@ -26,13 +29,26 @@ public class ShoppingSeleniumTest {
 	@Test
 	public void test_ShoppingWebsite() throws InterruptedException {
 		driver.get("http://www.automationpractice.com/index.php");
-		WebElement targ = driver.findElement(By.name("search_query"));
-		targ.sendKeys("Dress");
-		targ = driver.findElement(By.name("submit_search")); // press  search button
-		targ.click();
-		targ = driver.findElement(By.className("product_img_link")); // press  search button
-		targ.click();
-		targ = driver.findElement(By.xpath("//h1[@itemprop='name']"));
+		ShoppingHomePage website = PageFactory.initElements(driver, ShoppingHomePage.class);
+		website.searchDress();
+		
+		Thread.sleep(2000);
+		
+		website.dressPage.selectDress();
+		// need to use waits maybe?
+//		targ = driver.findElement(By.name("Submit"));
+//		targ.click();
+//		Thread.sleep(1000);
+//		targ = driver.findElement(By.xpath("//a[@title='Proceed to checkout']"));
+//		targ.click();
+//		Thread.sleep(1000);
+//		targ = driver.findElement(By.xpath("//a[@title='Proceed to checkout']"));
+//		targ.click();
+		
+		
+		
+		Thread.sleep(5000);
+		WebElement targ = driver.findElement(By.xpath("//h1[@itemprop='name']"));
 		assertEquals("Printed Summer Dress", targ.getText()); // first search result as of when this was made
 	}
 	
@@ -42,5 +58,4 @@ public class ShoppingSeleniumTest {
 		driver.quit();	
 		System.out.println("The Selenium driver has been cleaned up.");
 	}
-	
 }
